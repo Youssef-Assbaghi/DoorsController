@@ -1,0 +1,60 @@
+@startuml
+
+class Door{
++Door data
++Door(String id, String openC, String fireC, String unlockC)
+}
+
+class DoorData{
++int MaxNumTrials
++String id
++int numTrials
++String openCode
++String unlockCode
++String fireAlarmCode
++List<Pair> records
++Pair<String,String> records
++DoorData(String id, String openC, String fireC, String unlockC)
+}
+
+
+abstract Controller{
++Controller nextController
++setNextController(Controller nextController)
++handleRequest(DoorData doorData, String inputCode)
++nextController(Controller nextController)
+}
+
+class CheckAlarmController {
++handleRequest(DoorData doorData, String inputCode)
++nextController(Controller nextController)
+}
+class LockController{
++handleRequest(DoorData doorData, String inputCode)
++nextController(Controller nextController)
+}
+class UnlockController{
++handleRequest(DoorData doorData, String inputCode)
++nextController(Controller nextController)
+}
+
+class OpenDoorController{
++handleRequest(DoorData doorData, String inputCode)
++nextController(Controller nextController)
+}
+class RecordController{
+handleRequest(DoorData doorData, String inputCode)
+nextController(Controller nextController)
+}
+
+Controller  <|-down- CheckAlarmController
+Controller  <|-down-  LockController
+Controller  <|-down-  UnlockController
+Controller  <|-down-  OpenDoorController
+Controller  <|-down-  RecordController
+
+Door <-left- DoorData
+Door -left-> Controller
+@enduml
+
+
